@@ -204,13 +204,35 @@ if __name__ == '__main__':
     show_images(gaussian_filtered_images, "Gaussian Filtering")
 
     # Task2: Gradient Magnitude
-    gradient_magnitude_images = {k: gaussian_gradient_magnitude_filter(image, v) for k, v in sigma_list.items()}
-    show_images(gradient_magnitude_images, "Gradient Magnitude")
+    # gradient_magnitude_images = {k: gaussian_gradient_magnitude_filter(image, v) for k, v in sigma_list.items()}
+    # show_images(gradient_magnitude_images, "Gradient Magnitude")
 
     # Task3: Laplacian Gaussian
-    laplacian_gaussian_images = {k: laplacian_gaussian_filter(image, v) for k, v in sigma_list.items()}
-    show_images(laplacian_gaussian_images, "Laplacian Gaussian")
+    # laplacian_gaussian_images = {k: laplacian_gaussian_filter(image, v) for k, v in sigma_list.items()}
+    # show_images(laplacian_gaussian_images, "Laplacian Gaussian")
 
     # Task4: Canny Edge Detection
-    canny_edge(image)
+    # canny_edge(image)
 
+    # <!--------------------------------------------------------------------------->
+    # <!--                  SHOW NOISE AS A 1D IMPULSE FUNCTION                  -->
+    # <!--------------------------------------------------------------------------->
+
+    # Image resolution
+    h, w = image.shape
+
+    # Create a new matplotlib window.
+    fig = plt.figure()
+    ax = [plt.subplot(1, 4, x + 1) for x in range(4)]
+
+    # Define the row slider.
+    axcolor = "lightgoldenrodyellow"
+    slider_ax = plt.axes([0.1225, 0.02, 0.78, 0.03], facecolor=axcolor)
+    slider_row = Slider(slider_ax, "Row", 1.0, h, valinit=1, valfmt="%i")
+    slider_row.on_changed(partial(update_row, slider_row))
+
+    # Show the matplotlib window.
+    show_signals(1, gaussian_filtered_images)
+
+    # Show the images.
+    plt.show()
